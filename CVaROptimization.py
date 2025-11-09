@@ -1,3 +1,12 @@
+'''
+NOTES:
+
+Could put on the correlation between stocks in the diversity
+Random Disruptions
+- could be multiple types of disruption
+
+'''
+
 import random
 random.seed(0)
 Prices_global = [random.uniform(10.0, 200.0) for _ in range(20)]
@@ -21,7 +30,7 @@ def Evaluator(x):
     
     # ------------------------ Problem parameters and data ------------------------ #
     # Set random seed for reproducibility
-    random.seed(0)
+    random.seed(42)
     # Generate random data for stocks (Price, expected return rate, volatility)
     Prices = Prices_global[:dimensionality]
     # Ensure at least some moderate volatility and correlate return with risk for realism
@@ -115,12 +124,12 @@ def Evaluator(x):
         
         # Calculate final fitness as objective value plus total penalty
         fitness = objectiveFunctionValue + Total_ConstraintViolation
-        # print(f"Expected Return: {expected_return_total:.2f}")
-        # print(f"Risk (CVaR Proxy): {risk_total:.2f}")
-        # print(f"Raw Score: {raw_score:.2f}")
-        # print(f"Total Cost: {total_cost:.2f}, Budget Left: {ConstraintBudget:.2f}")
-        # print(f"Num Stocks Selected: {count}")
-        # print(f"Penalty: {Total_ConstraintViolation:.2f}")
+        print(f"Expected Return: {expected_return_total:.2f}")
+        print(f"Risk (CVaR Proxy): {risk_total:.2f}")
+        print(f"Raw Score: {raw_score:.2f}")
+        print(f"Total Cost: {total_cost:.2f}, Budget Left: {ConstraintBudget:.2f}")
+        print(f"Num Stocks Selected: {count}")
+        print(f"Penalty: {Total_ConstraintViolation:.2f}")
         return fitness
     
     # -------------------- Optimization problem instance -------------------- #
@@ -150,7 +159,7 @@ if __name__ == "__main__":
     from __main__ import Prices_global, totalBudget_global
 
     # Generate portfolio: random % of budget → then convert to shares
-    total_budget = 5000
+    total_budget = 5000000
     weights = np.random.rand(num_stocks)
     weights /= np.sum(weights)
     dollar_allocs = weights * totalBudget_global
