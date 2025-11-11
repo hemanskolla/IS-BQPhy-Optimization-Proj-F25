@@ -116,7 +116,7 @@ def Evaluator(x):
             violation_max = abs(ConstraintMax)
         
         # ------------------ Penalty coefficients for the constraints ------------------- #
-        penaltyCoefficients = [100.0, 100.0, 100.0, 100.0]  # Penalty weights for each constraint violation
+        penaltyCoefficients = [1e6, 1e6, 1e6, 1e6]  # Penalty weights for each constraint violation
         Total_ConstraintViolation = (penaltyCoefficients[0] * violation_budget +
                                      penaltyCoefficients[1] * violation_negative +
                                      penaltyCoefficients[2] * violation_min +
