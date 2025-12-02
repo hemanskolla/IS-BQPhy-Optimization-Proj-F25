@@ -44,7 +44,7 @@ def myFunc(x):
             if x[i] > 0:
                 num_selected_stocks += 1
 
-        objectiveFunctionValue = -expected_return + lambda_risk * portfolio_variance
+        objectiveFunctionValue = expected_return - lambda_risk * portfolio_variance
 
         # ------------------------ HARD CONSTRAINTS ------------------------ #
 
@@ -71,7 +71,7 @@ def myFunc(x):
             soft_penalty += 5.0 * (num_selected_stocks - preferred_max_stocks)
 
         # ------------------------ FINAL FITNESS FUNCTION ------------------ #
-        fitness = objectiveFunctionValue + violation + soft_penalty
+        fitness = -objectiveFunctionValue + violation + soft_penalty
 
         return fitness
 
